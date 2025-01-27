@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nearest Recipients</title>
+  {% load static %}
+  
+  <!-- Link to your custom CSS file -->
+  <link rel="stylesheet" href="{% static 'recipient_results.css' %}">
+  
+  <!-- OpenLayers CSS (Use the same version as your first page) -->
+  <link href="https://openlayers.org/en/v6.14.1/css/ol.css" type="text/css" rel="stylesheet">
+  
+  <!-- OpenLayers JS -->
+  <script src="https://openlayers.org/en/v6.14.1/build/ol.js"></script>  
+  <style>
+    #map {
+      width: 100%;
+      height: 500px; /* Ensure the map has a height */
+      border: 1px solid #000;  /* Optional border for better visibility */
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .result-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      padding: 10px;
+      background: #f9f9f9;
+    }
+    .result-card h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+    .result-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+    .submit-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .submit-btn:hover {
+      background: #218838;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <h1>Nearest Recipients</h1>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+    <!-- Recipients List -->
+    {% if recipients %}
+      <h2>Top 5 Nearest Recipients</h2>
+      {% for recipient in recipients %}
+        <div class="result-card">
+          <h3>{{ recipient.name }}</h3>
+          <p><strong>Address:</strong> {{ recipient.address }}</p>
+          <p><strong>Distance:</strong> {{ recipient.distance }} km</p>
+          <p><strong>Contact:</strong> {{ recipient.contact }}</p>
+          <a href="mailto:{{ recipient.contact }}" class="submit-btn">Email Recipient</a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No recipients found in your area. Please check back later.</p>
+    {% endif %}
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize the map
+      const map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()  // OpenStreetMap layer
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([0, 0]), // Default center of the map (neutral location)
+          zoom: 2 // Default zoom level for a global view
+        })
+      });
+    });
+  </script>
+</body>
+</html>

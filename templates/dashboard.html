@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Donation System</title>
+  {% load static %}
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2><a href="/home">Food Donation System</a></h2>
+      <nav>
+        <ul>
+          <!-- Donation Section -->
+          <li class="section-title">Donation Section</li>
+          <li><a href="/food-donation/">Food Donation</a></li>
+
+          <!-- Dashboard -->
+          
+          <li><a href="#profile">Profile</a></li>
+          {% if is_donor %}
+            <li><a href="#history">Donation History</a></li>
+          {% endif %}
+          {% if is_recipient %}
+            <li><a href="/choose-location/">Choose Location</a></li>
+          {% endif %}
+          {% if is_donor %}
+          <li><a href="/search-recipients/">Find Nearest Recipient</a></li>
+          {% endif %}
+          <!-- Settings -->
+          <li class="section-title">Settings</li>
+          <li><a href="#logout">Log Out</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="hero">
+        <h1>Join the Movement to End Food Waste</h1>
+        {% if is_donor %}
+          <button class="donate-btn">Donate Now</button>
+        {% endif %}
+
+        <div id="donateModal" class="modal">
+          <div class="modal-donate-content">
+              <span id="closeModal" class="close">&times;</span>
+              <div id="modalBody">
+                  <!-- Content from donate.html will be loaded here -->
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Modal -->
+      <div id="profileModal" class="modal">
+        <div class="modal-profile-content">
+          <span class="close">&times;</span>
+          <div id="profileModalBody">
+            <!-- Content from profile.html will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Choose Location Modal -->
+      <div id="locationModal" class="modal">
+        <div class="modal-location-content">
+          <span class="close">&times;</span>
+          <div id="locationModalBody">
+            <h2>Select a Location</h2>
+            <form id="locationForm">
+
+              <label for="location">Choose your location:</label></a>
+              <select id="location" name="location">
+                <option value="City Center">City Center</option>
+                <option value="Suburb">Suburb</option>
+                <option value="Downtown">Downtown</option>
+              </select>
+              <button type="submit" class="submit-btn">Confirm</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logout Modal -->
+      <div id="logoutModal" class="modal">
+        <div class="modal-content">
+          <h2>Confirm Logout</h2>
+          <p>Are you sure you want to log out?</p>
+          <div class="modal-buttons">
+            <button id="confirmLogout" class="yes-btn">Logout</button>
+            <button id="cancelLogout" class="cancel-btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script src="{% static 'js/logout.js' %}"></script>
+  <script src="{% static 'js/donorlocation.js' %}"></script>
+  <script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>
+

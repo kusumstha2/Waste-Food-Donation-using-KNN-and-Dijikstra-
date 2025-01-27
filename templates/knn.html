@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Quantity Prediction  </title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'knn.css' %}">
+</head>
+
+<body>
+    <h1>Food Quantity Prediction</h1>
+    <form method="POST" action="/predict/">
+        {% csrf_token %}
+    
+        <label for="type_of_food">Type of Food:</label>
+        <select id="type_of_food" name="type_of_food" required>
+            {% for food in type_of_food_options %}
+            <option value="{{ food }}">{{ food }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="quantity">Quantity of Food:</label>
+        <input type="number" id="quantity" name="quantity" required><br><br>
+
+        <label for="event_type">Event Type:</label>
+        <select id="event_type" name="event_type" required>
+            {% for event in event_type_options %}
+            <option value="{{ event }}">{{ event }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="storage_conditions">Storage Conditions:</label>
+        <select id="storage_conditions" name="storage_conditions" required>
+            {% for condition in storage_conditions_options %}
+            <option value="{{ condition }}">{{ condition }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+    <h3>{{ prediction_text }}</h3>
+    {% endif %}
+
+    {% if error_text %}
+    <h3 style="color: red;">{{ error_text }}</h3>
+    {% endif %}
+</body>
+
+</html>
