@@ -18,7 +18,7 @@ label_encoders = {
 }
 
 # Predefined options
-type_of_food_options = ['Meat (Kg)', 'Baked Goods(Kg)', 'Dairy Products(litre)', 'Fruits(kg)', 'Vegetables(Kg)']
+type_of_food_options = ['Meat', 'Baked Goods', 'Dairy Products', 'Fruits', 'Vegetables']
 event_type_options = ['Corporate', 'Social Gathering', 'Wedding', 'Birthday']
 storage_conditions_options = ['Room Temperature', 'Refrigerated']
 

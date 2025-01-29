@@ -2,28 +2,27 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from location.models import RecipientLocation
 from foodapp.models import *
-from .utils import *
-
+from .utils import send_email_to_recipient  # Import the fixed function
 
 def email_recipient(request, recipient_id):
-    if request.method == 'GET':
-        recipient_location = get_object_or_404(RecipientLocation, id=recipient_id)
-        return render(request, 'email.html', {'recipient': recipient_location})
-
     if request.method == 'POST':
         try:
-            # Get donor and food details
-            donor = request.user.donor
+            # Fetch the recipient location
+            recipient_location = get_object_or_404(RecipientLocation, id=recipient_id)
+            donor = request.user.donor  # Get the donor from the logged-in user
             donor_name = donor.user.username
-            food_details = request.POST.get("food_name")
 
+            # Get the food_name from the POST request
+            food_details = request.POST.get("food_name")
             if not food_details:
                 messages.error(request, "Food details are required.")
                 return redirect('email_recipient', recipient_id=recipient_id)
 
-            # Get recipient email
-            recipient_location = get_object_or_404(RecipientLocation, id=recipient_id)
-            recipient_email = recipient_location.recipient.user.email
+            # Ensure recipient exists
+            recipient = recipient_location.recipient  # Assuming `recipient` is linked to `User`
+            if not recipient or not recipient.user.email:
+                messages.error(request, "Recipient email not found.")
+                return redirect('email_recipient', recipient_id=recipient_id)
 
             # Email content
             subject = "Food Donation Notification"
@@ -40,10 +39,10 @@ def email_recipient(request, recipient_id):
             Food Donation System
             """
 
-            # Send email
-            send_email_to_recipient(subject, message, recipient_email)
+            # Send email using the recipient's ID
+            send_email_to_recipient(subject, message, recipient.user.id)
             messages.success(request, "Email sent successfully to the recipient.")
         except Exception as e:
             messages.error(request, f"Failed to send email: {e}")
 
-        return redirect('/home/')  # Replace with your actual redirect URL
+        return redirect('/')  # Adjust as needed for your home or success page

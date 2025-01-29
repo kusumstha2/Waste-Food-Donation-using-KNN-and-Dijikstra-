@@ -9,14 +9,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 from rest_framework.authentication import TokenAuthentication
 from django.http import JsonResponse
-from .utils import calculate_distance
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
 from django.http import JsonResponse
 from geopy.distance import geodesic
 from .models import Recipient
 from django.http import JsonResponse
-from .utils import notify_recipients
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
