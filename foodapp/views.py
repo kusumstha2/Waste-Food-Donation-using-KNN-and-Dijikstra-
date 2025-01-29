@@ -116,14 +116,23 @@ def donation_details(request, id):
         return JsonResponse({'error': 'Donation not found'}, status=404)
 
 
-def donate_food(request):
-    user = request.user  # Get the logged-in user
-    return render(request, 'profile.html', {
-        'username': user.username,
-        'email': user.email,
-        'phone': user.phone,
-        'address': user.address,
-    })
+from django.shortcuts import render
+
+# def donate_food(request):
+#     user = request.user  # Get the logged-in user
+#     # Print the user data to the terminal
+#     print(f"Username: {user.username}")
+#     print(f"Email: {user.email}")
+#     print(f"Phone: {user.phone}")
+#     print(f"Address: {user.address}")
+    
+#     return render(request, 'food donation.html', {
+#         'username': user.username,
+#         'email': user.email,
+#         'phone': user.phone,
+#         'address': user.address,
+#     })
+
 
     
 
@@ -173,31 +182,31 @@ def editdonation(request):
     return render(request,'edit donation page.html')
 
 
-# views.py
-from django.core.mail import send_mail
-from django.conf import settings
-from .utils import calculate_distance, knn_recipients
-from django.http import JsonResponse
+# # views.py
+# from django.core.mail import send_mail
+# from django.conf import settings
+# from .utils import calculate_distance, knn_recipients
+# from django.http import JsonResponse
 
-def notify_recipients(donation_id):
-    try:
-        donation = FoodDonation.objects.get(pk=donation_id)
-        recipients = knn_recipients(donation)  # Assuming this is your KNN function
+# def notify_recipients(donation_id):
+#     try:
+#         donation = FoodDonation.objects.get(pk=donation_id)
+#         recipients = knn_recipients(donation)  # Assuming this is your KNN function
 
-        # Iterate through the recipients and notify them
-        for recipient in recipients:
-            # Send email notification (Example)
-            send_mail(
-                subject=f"New Donation: {donation.foodName}",
-                message=f"Hello {recipient.name},\n\nThere is a new donation available: {donation.foodName}. Please contact us if you're interested.",
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[recipient.contact_number],  # Assuming you have an email or contact field
-            )
-            # Or notify via SMS if you have an SMS service like Twilio
-            # send_sms(recipient.contact_number, "New food donation available!")
+#         # Iterate through the recipients and notify them
+#         for recipient in recipients:
+#             # Send email notification (Example)
+#             send_mail(
+#                 subject=f"New Donation: {donation.foodName}",
+#                 message=f"Hello {recipient.name},\n\nThere is a new donation available: {donation.foodName}. Please contact us if you're interested.",
+#                 from_email=settings.DEFAULT_FROM_EMAIL,
+#                 recipient_list=[recipient.contact_number],  # Assuming you have an email or contact field
+#             )
+#             # Or notify via SMS if you have an SMS service like Twilio
+#             # send_sms(recipient.contact_number, "New food donation available!")
 
-        return JsonResponse({"message": "Notifications sent successfully"})
+#         return JsonResponse({"message": "Notifications sent successfully"})
 
-    except FoodDonation.DoesNotExist:
-        return JsonResponse({"error": "Donation not found"}, status=404)
+#     except FoodDonation.DoesNotExist:
+#         return JsonResponse({"error": "Donation not found"}, status=404)
 

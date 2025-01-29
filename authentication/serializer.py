@@ -33,15 +33,15 @@ class Userserializer(serializers.ModelSerializer):
 #       model = User
 #       fields = '__all__'
 
-class OTPVerificationSerializer(serializers.ModelSerializer):
-   class Meta:
-      model = OTPVerification
-      fields = '__all__'
+# class OTPVerificationSerializer(serializers.ModelSerializer):
+#    class Meta:
+#       model = OTPVerification
+#       fields = '__all__'
    
-   def validate_otp(self,value):
-      if len(value) != 6:
-         raise serializers.ValidationError('OTP must be 6 digits long.')
-      return value
+#    def validate_otp(self,value):
+#       if len(value) != 6:
+#          raise serializers.ValidationError('OTP must be 6 digits long.')
+#       return value
 
 class DonorSignupSerializer(serializers.ModelSerializer): 
     re_password = serializers.CharField(style = {"input_type":"password"}, write_only = True)

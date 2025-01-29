@@ -83,20 +83,74 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Donor Location
+      const donorLocation = [{{ donor_location.longitude }}, {{ donor_location.latitude }}];
+  
+      // Recipient Locations
+      const recipients = [
+        {% for recipient in recipients %}
+        {
+          name: "{{ recipient.name }}",
+          coords: [{{ recipient.longitude }}, {{ recipient.latitude }}],
+          distance: "{{ recipient.distance }}",
+        },
+        {% endfor %}
+      ];
+  
       // Initialize the map
       const map = new ol.Map({
         target: 'map',
         layers: [
           new ol.layer.Tile({
-            source: new ol.source.OSM()  // OpenStreetMap layer
+            source: new ol.source.OSM() // OpenStreetMap layer
           })
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([0, 0]), // Default center of the map (neutral location)
-          zoom: 2 // Default zoom level for a global view
+          center: ol.proj.fromLonLat(donorLocation),
+          zoom: 12, // Adjust zoom level for a closer view
         })
       });
+  
+      // Add Donor Marker
+      const donorMarker = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat(donorLocation)),
+      });
+      donorMarker.setStyle(
+        new ol.style.Style({
+          image: new ol.style.Icon({
+            src: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png', // Blue marker for donor
+            scale: 0.7,
+          }),
+        })
+      );
+  
+      // Add Recipient Markers
+      const recipientMarkers = recipients.map((recipient) => {
+        const feature = new ol.Feature({
+          geometry: new ol.geom.Point(ol.proj.fromLonLat(recipient.coords)),
+        });
+        feature.setStyle(
+          new ol.style.Style({
+            image: new ol.style.Icon({
+              src: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png', // Red marker for recipients
+              scale: 0.7,
+            }),
+          })
+        );
+        return feature;
+      });
+  
+      // Add all markers to the map
+      const vectorSource = new ol.source.Vector({
+        features: [donorMarker, ...recipientMarkers],
+      });
+      const vectorLayer = new ol.layer.Vector({
+        source: vectorSource,
+      });
+      map.addLayer(vectorLayer);
     });
+  </script>
+  
   </script>
 </body>
 </html>

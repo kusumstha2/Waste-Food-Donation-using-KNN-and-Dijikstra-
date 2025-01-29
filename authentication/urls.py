@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 router = DefaultRouter()
 
 # router.register(r'user',UserViewset,basename='user')
-router.register(r'otp-verification',OTPVerificationViewset,basename='otp-verification')
+# router.register(r'otp-verification',OTPVerificationViewset,basename='otp-verification')
 
 app_name = 'authentication' 
 from .  import views

@@ -9,8 +9,8 @@ router.register(r'recipients',RecipientViewSet,basename='recipient')
 router.register(r'donors',DonorViewSet,basename='donor')
 
 urlpatterns = [
-    path('notify-recipients/<int:donation_id>/', notify_recipients, name='notify_recipients'),
-    path('home/',index, name='index'),
+    # path('notify-recipients/<int:donation_id>/', notify_recipients, name='notify_recipients'),
+    path('',index, name='index'),
     path('aboutus/',views.aboutus, name='aboutus'),
     path('contactus/',views.contactus, name='contactus'),
     path('serving/',views.serving, name='serving'),

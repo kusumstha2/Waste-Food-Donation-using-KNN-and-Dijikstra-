@@ -1,135 +1,106 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-top: 20px;
+  color: #333;
 }
 
 .container {
-  width: 80%;
   max-width: 1200px;
-  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.donation-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .card {
-  background: white;
+  background: #fff;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 25px;
-  margin: 20px;
-  width: 250px;
-  display: inline-block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 15px;
   text-align: left;
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-10px);
+  position: relative;
 }
 
 .card img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: auto;
   border-radius: 8px;
 }
 
 .card h3 {
-  margin-top: 15px;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 1.5rem;
   color: #333;
+  margin: 10px 0;
 }
 
 .card p {
-  font-size: 14px;
+  font-size: 1rem;
   color: #555;
+  margin: 5px 0;
 }
 
 .card button {
-  padding: 8px 15px;
-  background-color: #ff5722;
-  color: white;
+  background-color: #007bff;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  color: white;
+  padding: 8px 12px;
+  font-size: 0.9rem;
   cursor: pointer;
-  font-size: 14px;
-  margin: 5px 0;
-  transition: background-color 0.3s ease;
+  margin: 5px 5px 0 0;
 }
 
 .card button:hover {
-  background-color: #e64a19;
+  background-color: #0056b3;
 }
 
-.card .edit-btn {
+.card button.view-details-btn {
   background-color: #28a745;
 }
 
-.card .edit-btn:hover {
+.card button.view-details-btn:hover {
   background-color: #218838;
 }
 
-.card .delete-btn {
-  background-color: #f44336;
-}
 
-.card .delete-btn:hover {
-  background-color: #d32f2f;
-}
-
-.card .view-details-btn {
-  background-color: #2196f3;
-}
-
-.card .view-details-btn:hover {
-  background-color: #1976d2;
-}
-
-/* Details section styles */
-.details-section {
-  margin-top: 15px;
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  display: none;
-}
-
-.details-section p {
-  font-size: 14px;
+/* Close Button Styling */
+.close-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  font-weight: bold;
   color: #555;
-}
-
-.details-section .back-btn {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  z-index: 1000;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.details-section .back-btn:hover {
-  background-color: #45a049;
-}
-
-/* Hide the buttons when viewing details */
-.card .edit-btn,
-.card .delete-btn,
-.card .view-details-btn {
-  display: inline-block;
-}
-
-.card .view-details-btn,
-.card .edit-btn,
-.card .delete-btn {
-  margin-top: 10px;
+.close-button:hover {
+  background-color: #ff4d4d;
+  color: white;
 }

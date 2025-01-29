@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'location',
     'nearestsearch',
     'KNN',
+    'notify',
     
 
 ]
@@ -221,19 +222,15 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Looking to send emails in production? Check out our Email API/SMTP product!
+# Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = os.getenv('EMAIL_HOST', 'sandbox.smtp.mailtrap.io')
-# EMAIL_HOST_USER = 'kusumstha251@gmail.com'
-# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'your_password')
-# EMAIL_PORT = os.getenv('EMAIL_PORT', '2525')
-# EMAIL_USE_TLS= True
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = '31d85bcf78974d'
-EMAIL_HOST_PASSWORD = 'eb2b54d021e381'
-EMAIL_PORT = 2525  # Ensure this is an integer, not a string
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your_sender_email@gmail.com'  # Replace with your sender email
+EMAIL_HOST_PASSWORD = 'hellokusum'  # Use an app password for Gmail
+DEFAULT_FROM_EMAIL = 'kusumstha251@gmail.com'
+
 
 # Session settings
 SESSION_COOKIE_SECURE = False  # Should be True in production with HTTPS

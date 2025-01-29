@@ -13,8 +13,8 @@ const profileModal = document.getElementById('profileModal');
 const profileModalBody = document.getElementById('profileModalBody');
 
 // Function to disable/enable body scroll
-const disableBodyScroll = () => (document.body.style.overflow = 'hidden');
-const enableBodyScroll = () => (document.body.style.overflow = '');
+// const disableBodyScroll = () => (document.body.style.overflow = 'hidden');
+// const enableBodyScroll = () => (document.body.style.overflow = '');
 
 // Initialize Donate Form Logic
 const initializeDonateForm = () => {
@@ -173,20 +173,20 @@ confirmLogout.addEventListener('click', () => {
   logoutModal.style.display = 'none';
   window.location.href = 'login.html';
 });
-// Get elements
-if (typeof logoutLink === 'undefined') {
-const logoutLink = document.querySelector('a[href="#logout"]');
-const logoutModal = document.getElementById('logoutModal');
-const confirmLogout = document.getElementById('confirmLogout');
-const cancelLogout = document.getElementById('cancelLogout');
+// // Get elements
+// if (typeof logoutLink === 'undefined') {
+// const logoutLink = document.querySelector('a[href="#logout"]');
+// const logoutModal = document.getElementById('logoutModal');
+// const confirmLogout = document.getElementById('confirmLogout');
+// const cancelLogout = document.getElementById('cancelLogout');
 
-const donateButton = document.querySelector('.donate-btn');
-const donateModal = document.getElementById('donateModal');
-const modalBody = document.getElementById('modalBody');
+// const donateButton = document.querySelector('.donate-btn');
+// const donateModal = document.getElementById('donateModal');
+// const modalBody = document.getElementById('modalBody');
 
-const profileLink = document.querySelector('a[href="#profile"]');
-const profileModal = document.getElementById('profileModal');
-const profileModalBody = document.getElementById('profileModalBody');
+// const profileLink = document.querySelector('a[href="#profile"]');
+// const profileModal = document.getElementById('profileModal');
+// const profileModalBody = document.getElementById('profileModalBody');
 
 const chooseLocationLink = document.querySelector('a[href="#choose-location"]');
 const locationModal = document.getElementById('locationModal');
@@ -195,7 +195,7 @@ const locationModalBody = document.getElementById('locationModalBody');
 // Function to disable/enable body scroll
 const disableBodyScroll = () => (document.body.style.overflow = 'hidden');
 const enableBodyScroll = () => (document.body.style.overflow = '');
-}
+
 // Handle Location Modal
 if (chooseLocationLink) {
   chooseLocationLink.addEventListener('click', (event) => {
@@ -225,16 +225,16 @@ if (chooseLocationLink) {
 }
 
 // Other modals (Donate, Profile, Logout) remain unchanged...
-logoutLink.addEventListener('click', (event) => {
-  event.preventDefault();
-  logoutModal.style.display = 'flex';
-});
+// logoutLink.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   logoutModal.style.display = 'flex';
+// });
 
-cancelLogout.addEventListener('click', () => {
-  logoutModal.style.display = 'none';
-});
+// cancelLogout.addEventListener('click', () => {
+//   logoutModal.style.display = 'none';
+// });
 
-confirmLogout.addEventListener('click', () => {
-  logoutModal.style.display = 'none';
-  window.location.href = 'login.html';
-});
+// confirmLogout.addEventListener('click', () => {
+//   logoutModal.style.display = 'none';
+//   window.location.href = 'login.html';
+// });

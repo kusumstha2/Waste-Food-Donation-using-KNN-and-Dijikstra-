@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const responseData = await response.json();
                 alert(responseData.message); // Show success message
                 localStorage.removeItem('token'); // Remove token from localStorage
-                window.location.href = '/home/'; // Redirect to the home page
+                window.location.href = '/'; // Redirect to the home page
             } else {
                 const errorData = await response.json();
                 alert(`Logout failed: ${errorData.message}`);

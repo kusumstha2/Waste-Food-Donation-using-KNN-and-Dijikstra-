@@ -27,4 +27,4 @@ admin.site.register(Recipient)
 class OTPVerificationAdmin(admin.ModelAdmin):
    list_display = ('email','otp','otp_created_at')
 
-admin.site.register(OTPVerification,OTPVerificationAdmin)
+# admin.site.register(OTPVerification,OTPVerificationAdmin)

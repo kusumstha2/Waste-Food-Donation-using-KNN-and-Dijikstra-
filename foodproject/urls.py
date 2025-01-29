@@ -53,6 +53,7 @@ urlpatterns = [
     path('',include('location.urls')),
     path('',include('nearestsearch.urls')),
     path('',include('KNN.urls')),
+    path('',include('notify.urls')),
     
     
 

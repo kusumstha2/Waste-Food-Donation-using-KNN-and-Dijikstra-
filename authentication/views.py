@@ -75,78 +75,78 @@
 #          return Response({'detail': 'Invalid username or password.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-from django.shortcuts import render
-from .models import *
-from .serializer import *
-from rest_framework import viewsets,status
-from django.core.mail import send_mail
-import random
-from rest_framework.response import Response
-from django.conf import settings
-from rest_framework.decorators import action
-from rest_framework.filters import SearchFilter
-from django_filters.rest_framework import DjangoFilterBackend
+# from django.shortcuts import render
+# from .models import *
+# from .serializer import *
+# from rest_framework import viewsets,status
+# from django.core.mail import send_mail
+# import random
+# from rest_framework.response import Response
+# from django.conf import settings
+# from rest_framework.decorators import action
+# from rest_framework.filters import SearchFilter
+# from django_filters.rest_framework import DjangoFilterBackend
    
-from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
-from django.contrib import messages
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
+# from django.shortcuts import render, redirect
+# from django.contrib.auth import get_user_model
+# from django.contrib import messages
+# from django.views.decorators.csrf import csrf_exempt
+# from django.utils.decorators import method_decorator
 
-# Create your views here.
-# class UserViewset(viewsets.ModelViewSet):
-#    queryset = User.objects.all().order_by('email')
-#    serializer_class = UserSerializer
+# # Create your views here.
+# # class UserViewset(viewsets.ModelViewSet):
+# #    queryset = User.objects.all().order_by('email')
+# #    serializer_class = UserSerializer
 
-class OTPVerificationViewset(viewsets.ModelViewSet):
-   queryset = OTPVerification.objects.all().order_by('email')
-   serializer_class = OTPVerificationSerializer
+# class OTPVerificationViewset(viewsets.ModelViewSet):
+#    queryset = OTPVerification.objects.all().order_by('email')
+#    serializer_class = OTPVerificationSerializer
    
-   @action(detail = False, methods = ['post'], url_path = 'send-otp')
-   def send_otp(self,request):
-      email = request.data.get('email')
+#    @action(detail = False, methods = ['post'], url_path = 'send-otp')
+#    def send_otp(self,request):
+#       email = request.data.get('email')
       
-      if email:
-         otp = random.randint(100000, 999999)
-         otp_record,created = OTPVerification.objects.update_or_create(
-            email = email,
-            defaults = {'otp':str(otp),'otp_created_at':timezone.now()}
-         )
+#       if email:
+#          otp = random.randint(100000, 999999)
+#          otp_record,created = OTPVerification.objects.update_or_create(
+#             email = email,
+#             defaults = {'otp':str(otp),'otp_created_at':timezone.now()}
+#          )
          
-         send_mail(
-            'Your OTP code',
-            f'YOur OTP code is {otp}',
-            settings.DEFAULT_FROM_EMAIL,
-            [email],
-            fail_silently=False
-         )
-         return Response({"message":"OTP send successfully","otp":otp},status = status.HTTP_200_OK)
-      return Response({"error":"Email is required"},status = status.HTTP_400_BAD_REQUEST)
+#          send_mail(
+#             'Your OTP code',
+#             f'YOur OTP code is {otp}',
+#             settings.DEFAULT_FROM_EMAIL,
+#             [email],
+#             fail_silently=False
+#          )
+#          return Response({"message":"OTP send successfully","otp":otp},status = status.HTTP_200_OK)
+#       return Response({"error":"Email is required"},status = status.HTTP_400_BAD_REQUEST)
    
-   @action(detail=False, methods=['post'],url_path='verify-otp')
-   def verify_otp(self,request):
-      email = request.data.get('email')
-      otp = request.data.get('otp')
+#    @action(detail=False, methods=['post'],url_path='verify-otp')
+#    def verify_otp(self,request):
+#       email = request.data.get('email')
+#       otp = request.data.get('otp')
       
-      if email and otp:
-         try:
-            otp_record = OTPVerification.objects.get(email = email,otp=otp)
+#       if email and otp:
+#          try:
+#             otp_record = OTPVerification.objects.get(email = email,otp=otp)
             
-            if otp_record.is_expired():
-               otp_record.delete()
-               return Response({"error":"OTP is expired"},status = status.HTTP_400_BAD_REQUEST)
+#             if otp_record.is_expired():
+#                otp_record.delete()
+#                return Response({"error":"OTP is expired"},status = status.HTTP_400_BAD_REQUEST)
             
-            otp_record.delete()
-            return Response({"message":"OTP verified successfully"},status = status.HTTP_200_OK)
+#             otp_record.delete()
+#             return Response({"message":"OTP verified successfully"},status = status.HTTP_200_OK)
          
-         except OTPVerification.DoesNotExist:
-            return Response({"error":"Invalid OTP"},status = status.HTTP_400_BAD_REQUEST)
+#          except OTPVerification.DoesNotExist:
+#             return Response({"error":"Invalid OTP"},status = status.HTTP_400_BAD_REQUEST)
       
-      return Response ({"error":"Email and OTP are required"},status = status.HTTP_400_BAD_REQUEST)
+#       return Response ({"error":"Email and OTP are required"},status = status.HTTP_400_BAD_REQUEST)
    
 
 
-User = get_user_model()
+# User = get_user_model()
 # @csrf_exempt
 
 # def register_view(request):
