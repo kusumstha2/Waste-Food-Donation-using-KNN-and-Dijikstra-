@@ -70,9 +70,9 @@
       {% for recipient in recipients %}
         <div class="result-card">
           <h3>{{ recipient.name }}</h3>
-          <p><strong>Address:</strong> {{ recipient.address }}</p>
+          {% comment %} <p><strong>Address:</strong> {{ recipient.address }}</p> {% endcomment %}
           <p><strong>Distance:</strong> {{ recipient.distance }} km</p>
-          <p><strong>Contact:</strong> {{ recipient.contact }}</p>
+          {% comment %} <p><strong>Contact:</strong> {{ recipient.contact }}</p> {% endcomment %}
           <a href="mailto:{{ recipient.contact }}" class="submit-btn">Email Recipient</a>
         </div>
       {% endfor %}

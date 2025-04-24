@@ -1,6 +1,6 @@
 /* General Reset */
 body {
-  background: #333;
+  background-color: rgb(223, 208, 208);
   margin: 0;
   display: flex;
   justify-content: center;
@@ -20,7 +20,7 @@ body {
 
 /* Profile Card */
 .profile-card {
-  background: transparent;
+  background-color: rgb(222, 221, 221);
   color: whitesmoke;
   backdrop-filter: blur(15px);
   border-radius: 10px;

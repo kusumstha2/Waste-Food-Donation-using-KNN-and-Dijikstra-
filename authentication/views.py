@@ -335,3 +335,24 @@ class logout(APIView):
 
         except Exception as e:
             return Response({'message': 'Logout failed. Please try again.', 'error': str(e)}, status=400)
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Donor, Recipient
+
+@login_required
+def profile_view(request):
+    user = request.user
+    # Determine if the user is a Donor or Recipient
+    if user.is_Donor==True:
+        profile = Donor.objects.filter(user=user).first()
+        user_type = "Donor"
+    elif user.is_Recipient:
+        profile = Recipient.objects.filter(user=user).first()
+        user_type = "Recipient"
+    else:
+        return redirect("/")  # Redirect if the user doesn't have a defined role
+
+    # Pass profile data to the template
+    return render(request, "profile.html", {"profile": profile, "user_type": user_type})
+        

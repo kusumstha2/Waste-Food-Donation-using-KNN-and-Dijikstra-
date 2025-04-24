@@ -16,7 +16,6 @@ urlpatterns = [
     path('serving/',views.serving, name='serving'),
     
     path('donate/', views.donate_food, name='donate_food'),
-    path('profile/',views.profile, name='profile'),
     path('food-donation/',views.food_donation, name='food-donation'),
     path('donation_details/<int:id>/', views.donation_details, name='donation_details'),
     path('editdonation/', views.editdonation, name='editdonation'),

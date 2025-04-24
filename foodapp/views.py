@@ -93,7 +93,7 @@ def serving(request):
 
 def food_donation(request):
     donations = FoodDonation.objects.all()  # Get all donations from the database
-    return render(request, 'food donation.html', {'donations': donations})
+    return render(request, 'foodapp/food_donation.html', {'donations': donations})
 
 from django.http import JsonResponse
 from .models import FoodDonation
@@ -109,6 +109,7 @@ def donation_details(request, id):
             'description': donation.description,
             'expiry_date': donation.expiry_date,
             'location': donation.location,
+    
         }
         return JsonResponse(data)
     except FoodDonation.DoesNotExist:
@@ -116,21 +117,6 @@ def donation_details(request, id):
 
 
 from django.shortcuts import render
-
-# def donate_food(request):
-#     user = request.user  # Get the logged-in user
-#     # Print the user data to the terminal
-#     print(f"Username: {user.username}")
-#     print(f"Email: {user.email}")
-#     print(f"Phone: {user.phone}")
-#     print(f"Address: {user.address}")
-    
-#     return render(request, 'food donation.html', {
-#         'username': user.username,
-#         'email': user.email,
-#         'phone': user.phone,
-#         'address': user.address,
-#     })
 
 
     

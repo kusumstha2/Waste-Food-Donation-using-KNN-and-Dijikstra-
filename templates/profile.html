@@ -5,7 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Profile</title>
   {%load static%}
-  <link rel="stylesheet" href="{% static 'profile.css' %}">
+  <style>
+    /* General Reset */
+body {
+  background: rgb(223, 208, 208);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+/* Profile Container */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 100%;  /* Ensures the container takes full width */
+  padding: 0 20px; /* Adds some padding around the container */
+}
+
+/* Profile Card */
+.profile-card {
+  background: rgb(222, 221, 221);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px orangered;
+  text-align: center;
+  padding: 30px;
+  width: 80%; /* Set the width to 80% or whatever you prefer */
+  max-width: 300px; /* Maximum width to prevent it from getting too large */
+  margin: 0 auto; /* Centers the card horizontally */
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  cursor:pointer;
+  border: 2px solid orangered;
+  margin-bottom: 20px;
+}
+
+.name {
+  font-size: 24px;
+  color: whitesmoke;
+  margin-bottom: 5px;
+}
+
+#extraInfo p {
+  margin: 10px 0;
+}
+
+  </style>
+  
 </head>
 <body>
   <div class="profile-container">
@@ -14,13 +69,15 @@
       <input type="file" id="changeProfilePic" accept="image/*" style="display: none;">
       <h1 id="userName">{{ username }}</h1>
       <div id="extraInfo">
-        <p>Email: <span id="userEmail"></span></p>
-        <p>Phone: <span id="userPhone"></span></p>
-        <p>Address: <span id="userAddress"></span></p>
+        <h2>Username: {{ profile.user.username }}</h2>
+            <p>Email: {{ profile.user.email }}</p>
+            <p>Phone: {{ profile.phone }}</p>
+            <p>Address: {{ profile.user.address }}</p>
       </div>
     </div>
   </div>
 
-  <script src="{% static 'js/profile.js' %}"></script>
+  {% comment %} <script src="{% static 'js/profile.js' %}"></script> {% endcomment %}
+  
 </body>
 </html>

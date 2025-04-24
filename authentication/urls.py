@@ -30,5 +30,6 @@ urlpatterns = [
     path('recipient/login/', RecipientLoginView.as_view(), name='recipient-login'),
     path('dashboard/',Dashboard.as_view(), name='dashboard'),
     path('logout/',logout.as_view(), name='logout'),
+    path("profile/", profile_view, name="profile"),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
